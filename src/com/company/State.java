@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.HashMap;
+
 public class State
 {
     public int n ;
@@ -13,6 +15,22 @@ public class State
     {
         initialized = false;
     }
+
+    public State (int n , int m , int k, int capacitate_n, int capacitate_m )
+    {
+        initialized = true;
+        this.n = n;
+        this.m = m;
+        this.k = k;
+        this.capacitate_m = capacitate_m;
+        this.capacitate_n = capacitate_n;
+    }
+
+    public State copyState()
+    {
+        return new State(this.n, this.m, this.k, this.capacitate_n, this.capacitate_m);
+    }
+
 
     public void Initialize(int n , int m , int k )
     {
@@ -122,5 +140,18 @@ public class State
     private boolean canEmptyN()
     {
         return capacitate_n > 0;
+    }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (o == null || Object.class.getClass() != State.class.getClass() ) return false;
+        State obj = (State) o;
+        return (obj.n == this.n && obj.m == this.m && this.capacitate_n == obj.capacitate_n && this.capacitate_m == obj.capacitate_m );
+    }
+
+    @Override
+    public String toString() {
+        return this.n + " " + this.m + " " + this.k +" "+this.capacitate_n + " "+this.capacitate_m;
     }
 }
